@@ -424,30 +424,30 @@ public class Menu extends javax.swing.JFrame {
         txtATraducido.setText("");
         String simbolo = "([=<>])",
                 id = "([(a-z)(A-Z)](\\w)*)",
-                num = "((\\d)+)",
+                number = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
                 print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
                 take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
-                operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
-                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*(;))",
-                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
-                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
-                var = "((\\s)*((NUM)|(DNUM)|(WORD))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
+                operaciones = "((" + id + "|" + number + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + number + "|" + dec + "))+)",
+                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*(;))",
+                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*)",
+                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + number + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + number + "|" + dec + ")))*",
+                var = "((\\s)*((NUMBER)|(DNUM)|(STRING))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
                 main = "((\\s)*" + id + "txtATraducidoBEGIN(\\s)*(\\{)[.\\W\\w\\s]*(END(\\s)*(\\})(\\s)*)$)",
                 main2 = "((\\s)*" + id + "(\\b)(\\s)*BEGIN(\\s)*(\\{))",
                 main3 = "((\\s)*END(\\s)*(\\})(\\s)*)",
-                start2 = "((\\s)*START(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(STEP)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
-                foresito = "((\\s)*FOR(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(TO)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*)",
+                start2 = "((\\s)*START(\\b)(\\s)*(" + id + "|" + number + ")(\\b)(\\s)*(=)*(" + id + "|" + number + ")(\\b)(\\s)*(STEP)(\\b)(\\s)*" + number + "(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*(" + id + "|" + number + ")(\\s)*(\\{))",
+                foresito = "((\\s)*FOR(\\b)(\\s)*(" + id + "|" + number + ")(\\b)(\\s)*(TO)(\\b)(\\s)*(" + id + "|" + number + ")(\\s)*)",
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
                 when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 when3 = "((\\s)*SWHEN(\\s)*(\\}))",
                 it2 = "((\\s)*IT(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 it3 = "((\\s)*COMPLETE(\\s)*(\\}))",
                 entero = "[0-9]*",
-                step = "(STEP)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)",
-                to = "TO(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{)",
+                step = "(STEP)(\\b)(\\s)*" + number + "(\\s)*[+-]?(\\s)*(\\b)",
+                to = "TO(\\b)(\\s)*(" + id + "|" + number + ")(\\s)*(\\{)",
                 decimal = "[0-9]*.[0-9]+";
 
         StringTokenizer st = new StringTokenizer(txtATexto1.getText(), "\n");
@@ -490,15 +490,15 @@ public class Menu extends javax.swing.JFrame {
                     testo = testo + txtATraducido.getText();
                     tokinn = tokin.nextToken();
 
-                    if (tokinn.contains("NUM") || tokinn.contains("DNUM") || tokinn.contains("WORD")) {
+                    if (tokinn.contains("NUMBER") || tokinn.contains("DNUM") || tokinn.contains("STRING")) {
                         String enteros = "";
-                        if (tokinn.contains("NUM")) {
+                        if (tokinn.contains("NUMBER")) {
                             enteros = " AS INTEGER";
                         }
                         if (tokinn.contains("DNUM")) {
                             enteros = " AS DOUBLE";
                         }
-                        if (tokinn.contains("WORD")) {
+                        if (tokinn.contains("STRING")) {
                             enteros = " AS STRING";
                         }
 
@@ -763,21 +763,21 @@ public class Menu extends javax.swing.JFrame {
 
         String simbolo = "([=<>])",
                 id = "([(a-z)(A-Z)](\\w)*)",
-                num = "((\\d)+)",
+                number = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
                 print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
                 take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
-                operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
-                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*(;))",
-                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
-                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
-                var = "((\\s)*((NUM)|(DNUM)|(WORD))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
+                operaciones = "((" + id + "|" + number + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + number + "|" + dec + "))+)",
+                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*(;))",
+                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*)",
+                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + number + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + number + "|" + dec + ")))*",
+                var = "((\\s)*((NUMBER)|(DNUM)|(STRING))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
                 main = "((\\s)*" + id + "(\\b)(\\s)*BEGIN(\\s)*(\\{)[.\\W\\w\\s]*(END(\\s)*(\\})(\\s)*)$)",
                 main2 = "((\\s)*" + id + "(\\b)(\\s)*BEGIN(\\s)*(\\{))",
                 main3 = "((\\s)*END(\\s)*(\\})(\\s)*)",
-                start2 = "((\\s)*START(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(STEP)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
+                start2 = "((\\s)*START(\\b)(\\s)*(" + id + "|" + number + ")(\\b)(\\s)*(=)*(" + id + "|" + number + ")(\\b)(\\s)*(STEP)(\\b)(\\s)*" + number + "(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*(" + id + "|" + number + ")(\\s)*(\\{))",
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
                 when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 when3 = "((\\s)*SWHEN(\\s)*(\\}))",
@@ -841,7 +841,7 @@ public class Menu extends javax.swing.JFrame {
                         StringTokenizer stTipo = new StringTokenizer(token, " ,;");
                         String tipo = stTipo.nextToken();
 
-                        if (tipo.contains("NUM")) {
+                        if (tipo.contains("NUMBER")) {
 
                             while (stTipo.hasMoreTokens()) {
                                 tipo = stTipo.nextToken();
@@ -898,7 +898,7 @@ public class Menu extends javax.swing.JFrame {
                                 TAKE.add(tipo);
                             }
                         }
-                        if (tipo.contains("WORD")) {
+                        if (tipo.contains("STRING")) {
 
                             while (stTipo.hasMoreTokens()) {
                                 tipo = stTipo.nextToken();
@@ -1023,7 +1023,7 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("NUM") || token.contains("DNUM") || token.contains("WORD")) {
+                    if (token.contains("NUMBER") || token.contains("DNUM") || token.contains("STRING")) {
                         ERROR_Area.setText("Error en declaracion de variables; en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
@@ -1178,7 +1178,7 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("NUM") || token.contains("DNUM") || token.contains("WORD")) {
+                    if (token.contains("NUMBER") || token.contains("DNUM") || token.contains("STRING")) {
                         ERROR_Area.setText("Error en declaracion de variables  en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
@@ -1296,21 +1296,21 @@ public class Menu extends javax.swing.JFrame {
 
         String simbolo = "([=<>])",
                 id = "([(a-z)(A-Z)](\\w)*)",
-                num = "((\\d)+)",
+                number = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
                 print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
                 take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
-                operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
-                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*(;))",
-                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + num + "|" + dec + ")(\\s)*)",
-                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + num + "|" + dec + ")))*",
-                var = "((\\s)*((NUM)|(DNUM)|(WORD))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
+                operaciones = "((" + id + "|" + number + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + number + "|" + dec + "))+)",
+                defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*(;))",
+                defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*)",
+                condicion = id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + number + "|" + dec + ")((\\s)*([(&&)(||)](\\s)*" + id + "(\\s)*" + simbolo + "(\\s)*(" + id + "|" + number + "|" + dec + ")))*",
+                var = "((\\s)*((NUMBER)|(DNUM)|(STRING))(\\b)(\\s)*(" + id + "|" + defValVar + ")((\\s)*(,(\\s)*(" + id + "|" + defValVar + ")))*(\\s)*(;))",
                 main = "((\\s)*" + id + "(\\b)(\\s)*BEGIN(\\s)*(\\{)[.\\W\\w\\s]*(END(\\s)*(\\})(\\s)*)$)",
                 main2 = "((\\s)*" + id + "(\\b)(\\s)*BEGIN(\\s)*(\\{))",
                 main3 = "((\\s)*END(\\s)*(\\})(\\s)*)",
-                start2 = "((\\s)*START(\\b)(\\s)*(" + id + "|" + num + ")(\\b)(\\s)*(=)*(" + id + "|" + num + ")(\\b)(\\s)*(STEP)(\\b)(\\s)*" + num + "(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*(" + id + "|" + num + ")(\\s)*(\\{))",
+                start2 = "((\\s)*START(\\b)(\\s)*(" + id + "|" + number + ")(\\b)(\\s)*(=)*(" + id + "|" + number + ")(\\b)(\\s)*(STEP)(\\b)(\\s)*" + number + "(\\s)*[+-]?(\\s)*(\\b)(TO)(\\b)(\\s)*(" + id + "|" + number + ")(\\s)*(\\{))",
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
                 when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 when3 = "((\\s)*SWHEN(\\s)*(\\}))",
@@ -1374,7 +1374,7 @@ public class Menu extends javax.swing.JFrame {
                         StringTokenizer stTipo = new StringTokenizer(token, " ,;");
                         String tipo = stTipo.nextToken();
 
-                        if (tipo.contains("NUM")) {
+                        if (tipo.contains("NUMBER")) {
 
                             while (stTipo.hasMoreTokens()) {
                                 tipo = stTipo.nextToken();
@@ -1431,7 +1431,7 @@ public class Menu extends javax.swing.JFrame {
                                 TAKE.add(tipo);
                             }
                         }
-                        if (tipo.contains("WORD")) {
+                        if (tipo.contains("STRING")) {
 
                             while (stTipo.hasMoreTokens()) {
                                 tipo = stTipo.nextToken();
@@ -1556,7 +1556,7 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("NUM") || token.contains("DNUM") || token.contains("WORD")) {
+                    if (token.contains("NUMBER") || token.contains("DNUM") || token.contains("STRING")) {
                         ERROR_Area.setText("Error en declaracion de variables; en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
@@ -1711,7 +1711,7 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("NUM") || token.contains("DNUM") || token.contains("WORD")) {
+                    if (token.contains("NUMBER") || token.contains("DNUM") || token.contains("STRING")) {
                         ERROR_Area.setText("Error en declaracion de variables  en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
@@ -1848,9 +1848,9 @@ public class Menu extends javax.swing.JFrame {
 
         r.put("BEGIN", 0);
         r.put("END", 0);
-        r.put("WORD", 0);
+        r.put("STRING", 0);
         r.put("ALFA", 0);
-        r.put("NUM", 0);
+        r.put("NUMBER", 0);
         r.put("DNUM", 0);
         r.put("BOOL", 0);
         r.put("LNUM", 0);
