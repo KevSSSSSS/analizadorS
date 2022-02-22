@@ -246,6 +246,7 @@ public class Menu extends javax.swing.JFrame {
         txtATexto1.setBackground(new java.awt.Color(0, 0, 102));
         txtATexto1.setColumns(20);
         txtATexto1.setForeground(new java.awt.Color(255, 255, 0));
+        txtATexto1.setFont(new java.awt.Font("Courier New", 0, 14));
         txtATexto1.setRows(5);
         jScrollPane2.setViewportView(txtATexto1);
 
@@ -280,7 +281,7 @@ public class Menu extends javax.swing.JFrame {
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(113, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -300,7 +301,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 990, 850));
+        getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 840));
 
         jMenu1.setText("MENU");
         jMenu1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -426,7 +427,7 @@ public class Menu extends javax.swing.JFrame {
                 num = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
-                send = "((\\s)*SEND(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
                 take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
@@ -673,11 +674,11 @@ public class Menu extends javax.swing.JFrame {
                     }
                 }
             }
-            if (token1.matches(send)) {
+            if (token1.matches(print)) {
                 StringTokenizer st2 = new StringTokenizer(token1, "()");
                 while (st2.hasMoreTokens()) {
                     String tuken = st2.nextToken();
-                    if (tuken.contains("SEND")) {
+                    if (tuken.contains("PRINT")) {
 
                         String a = txtATraducido.getText() + "\nPRINT  ";
                         a = a.replace('#', '"');
@@ -706,7 +707,7 @@ public class Menu extends javax.swing.JFrame {
                         a = a.replace('#', '"');
                         txtATraducido.setText(a);
                     }
-                    if (tuken.contains("SEND") == false && tuken.contains("+") == false && tuken.contains(";") == false) {
+                    if (tuken.contains("PRINT") == false && tuken.contains("+") == false && tuken.contains(";") == false) {
                         String a = txtATraducido.getText() + tuken;
                         a = a.replace('#', '"');
                         txtATraducido.setText(a);
@@ -765,7 +766,7 @@ public class Menu extends javax.swing.JFrame {
                 num = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
-                send = "((\\s)*SEND(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
                 take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
@@ -832,7 +833,7 @@ public class Menu extends javax.swing.JFrame {
                     eB = 1;
                 }
 
-                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                if ((token.matches(print) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
                     if (token.matches(take)) {
 
                     }
@@ -1010,9 +1011,9 @@ public class Menu extends javax.swing.JFrame {
                         }
                     }
                 } else {
-                    if (token.contains("SEND")) {
+                    if (token.contains("PRINT")) {
                         txtATraducido.setText("PRINT");
-                        ERROR_Area.setText("Error al declarar sentencia SEND; en la linea " + i + ": \n"
+                        ERROR_Area.setText("Error al declarar sentencia PRINT; en la linea " + i + ": \n"
                                 + "\n" + token);
                         errores = 1;
                         for (int j = 1; j < i; j++) {
@@ -1161,14 +1162,14 @@ public class Menu extends javax.swing.JFrame {
                     eB = 1;
                 }
 
-                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                if ((token.matches(print) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
                     ERROR_Area.setText("Compilado Exitosamente");
                     if (token.matches(main3)) {
                         eB = 1;
                     }
                 } else {
-                    if (token.contains("SEND")) {
-                        ERROR_Area.setText("Error al declarar sentencia SEND  en la linea " + i + ": \n"
+                    if (token.contains("PRINT")) {
+                        ERROR_Area.setText("Error al declarar sentencia PRINT  en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1298,7 +1299,7 @@ public class Menu extends javax.swing.JFrame {
                 num = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
                 text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
-                send = "((\\s)*SEND(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
                 take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "((" + id + "|" + num + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + num + "|" + dec + "))+)",
@@ -1365,7 +1366,7 @@ public class Menu extends javax.swing.JFrame {
                     eB = 1;
                 }
 
-                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                if ((token.matches(print) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
                     if (token.matches(take)) {
 
                     }
@@ -1543,9 +1544,9 @@ public class Menu extends javax.swing.JFrame {
                         }
                     }
                 } else {
-                    if (token.contains("SEND")) {
+                    if (token.contains("PRINT")) {
                         txtATraducido.setText("PRINT");
-                        ERROR_Area.setText("Error al declarar sentencia SEND; en la linea " + i + ": \n"
+                        ERROR_Area.setText("Error al declarar sentencia PRINT; en la linea " + i + ": \n"
                                 + "\n" + token);
                         errores = 1;
                         for (int j = 1; j < i; j++) {
@@ -1694,14 +1695,14 @@ public class Menu extends javax.swing.JFrame {
                     eB = 1;
                 }
 
-                if ((token.matches(send) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
+                if ((token.matches(print) || token.matches(take) || token.matches(var) || token.matches(defVal) || token.matches(main2) || token.matches(main3) || token.matches("(\\s)*(\\$)") || token.matches(start2) || token.matches(start3) || token.matches(when2) || token.matches(when3) || token.matches(it2) || token.matches(it3)) && eB == 0) {
                     ERROR_Area.setText("Compilado Exitosamente");
                     if (token.matches(main3)) {
                         eB = 1;
                     }
                 } else {
-                    if (token.contains("SEND")) {
-                        ERROR_Area.setText("Error al declarar sentencia SEND  en la linea " + i + ": \n"
+                    if (token.contains("PRINT")) {
+                        ERROR_Area.setText("Error al declarar sentencia PRINT  en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1854,7 +1855,7 @@ public class Menu extends javax.swing.JFrame {
         r.put("BOOL", 0);
         r.put("LNUM", 0);
         r.put("TAKE", 0);
-        r.put("SEND", 0);
+        r.put("PRINT", 0);
         r.put("WHEN", 0);
         r.put("IT", 0);
         r.put("IS", 0);
