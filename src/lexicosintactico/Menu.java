@@ -426,10 +426,10 @@ public class Menu extends javax.swing.JFrame {
                 id = "([(a-z)(A-Z)](\\w)*)",
                 number = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
-                text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
-                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                text = "((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)",
+                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "((" + id + "|" + number + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + number + "|" + dec + "))+)",
                 defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*(;))",
                 defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*)",
@@ -443,8 +443,8 @@ public class Menu extends javax.swing.JFrame {
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
                 when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 when3 = "((\\s)*SWHEN(\\s)*(\\}))",
-                it2 = "((\\s)*IT(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
-                it3 = "((\\s)*COMPLETE(\\s)*(\\}))",
+                it2 = "((\\s)*IF(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                it3 = "((\\s)*ENDIF(\\s)*(\\}))",
                 entero = "[0-9]*",
                 step = "(STEP)(\\b)(\\s)*" + number + "(\\s)*[+-]?(\\s)*(\\b)",
                 to = "TO(\\b)(\\s)*(" + id + "|" + number + ")(\\s)*(\\{)",
@@ -612,7 +612,7 @@ public class Menu extends javax.swing.JFrame {
                         }
                     }
 
-                    if (tuken.contains("IT")) {
+                    if (tuken.contains("IF")) {
                         String a = txtATraducido.getText() + "\nIF ";
                         txtATraducido.setText(a);
                         /*String loqueva=a+txtATraducido.getText()+" THEN";
@@ -640,7 +640,7 @@ public class Menu extends javax.swing.JFrame {
                     if (tuken.contains("TAKE")) {
 
                         String a = txtATraducido.getText() + "\nINPUT  ";
-                        a = a.replace('#', '"');
+                        a = a.replace('\"', '"');
                         txtATraducido.setText(a);
                     }
                     if (tuken.contains("+")) {
@@ -650,11 +650,11 @@ public class Menu extends javax.swing.JFrame {
                             tokesito = tuk.nextToken();
                             if (tuk.hasMoreTokens()) {
                                 String a = txtATraducido.getText() + tokesito + ",";
-                                a = a.replace('#', '"');
+                                a = a.replace('\"', '"');
                                 txtATraducido.setText(a);
                             } else {
                                 String a = txtATraducido.getText() + tokesito;
-                                a = a.replace('#', '"');
+                                a = a.replace('\"', '"');
 
                                 txtATraducido.setText(a);
                             }
@@ -663,13 +663,13 @@ public class Menu extends javax.swing.JFrame {
 
                     if (tuken.contains(";")) {
                         String a = txtATraducido.getText() + "\n";
-                        a = a.replace('#', '"');
+                        a = a.replace('\"', '"');
                         txtATraducido.setText(a);
 
                     }
                     if (tuken.contains("TAKE") == false && tuken.contains("+") == false && tuken.contains(";") == false) {
                         String a = txtATraducido.getText() + tuken;
-                        a = a.replace('#', '"');
+                        a = a.replace('\"', '"');
                         txtATraducido.setText(a);
                     }
                 }
@@ -681,7 +681,7 @@ public class Menu extends javax.swing.JFrame {
                     if (tuken.contains("PRINT")) {
 
                         String a = txtATraducido.getText() + "\nPRINT  ";
-                        a = a.replace('#', '"');
+                        a = a.replace('\"', '"');
 
                         txtATraducido.setText(a);
                     }
@@ -692,11 +692,11 @@ public class Menu extends javax.swing.JFrame {
                             tokesito = tuk.nextToken();
                             if (tuk.hasMoreTokens()) {
                                 String a = txtATraducido.getText() + tokesito + ",";
-                                a = a.replace('#', '"');
+                                a = a.replace('\"', '"');
                                 txtATraducido.setText(a);
                             } else {
                                 String a = txtATraducido.getText() + tokesito;
-                                a = a.replace('#', '"');
+                                a = a.replace('\"', '"');
                                 txtATraducido.setText(a);
                             }
                         }
@@ -704,12 +704,12 @@ public class Menu extends javax.swing.JFrame {
 
                     if (tuken.contains(";")) {
                         String a = txtATraducido.getText() + " \n";
-                        a = a.replace('#', '"');
+                        a = a.replace('\"', '"');
                         txtATraducido.setText(a);
                     }
                     if (tuken.contains("PRINT") == false && tuken.contains("+") == false && tuken.contains(";") == false) {
                         String a = txtATraducido.getText() + tuken;
-                        a = a.replace('#', '"');
+                        a = a.replace('\"', '"');
                         txtATraducido.setText(a);
                     }
                 }
@@ -765,10 +765,10 @@ public class Menu extends javax.swing.JFrame {
                 id = "([(a-z)(A-Z)](\\w)*)",
                 number = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
-                text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
-                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                text = "((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)",
+                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "((" + id + "|" + number + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + number + "|" + dec + "))+)",
                 defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*(;))",
                 defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*)",
@@ -781,8 +781,8 @@ public class Menu extends javax.swing.JFrame {
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
                 when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 when3 = "((\\s)*SWHEN(\\s)*(\\}))",
-                it2 = "((\\s)*IT(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
-                it3 = "((\\s)*COMPLETE(\\s)*(\\}))",
+                it2 = "((\\s)*IF(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                it3 = "((\\s)*ENDIF(\\s)*(\\}))",
                 entero = "[0-9]*",
                 decimal = "[0-9]*.[0-9]+";
 
@@ -1084,9 +1084,9 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("COMPLETE")) {
+                    if (token.contains("ENDIF")) {
 
-                        ERROR_Area.setText("Cierre de condicion IT incorrecto en la linea " + i + ": \n"
+                        ERROR_Area.setText("Cierre de condicion IF incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1095,9 +1095,9 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("IT")) {
+                    if (token.contains("IF")) {
 
-                        ERROR_Area.setText("Inicio de IT incorrecto; en la linea " + i + ": \n"
+                        ERROR_Area.setText("Inicio de IF incorrecto; en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1238,8 +1238,8 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("COMPLETE")) {
-                        ERROR_Area.setText("Cierre de condicion IT incorrecto; en la linea " + i + ": \n"
+                    if (token.contains("ENDIF")) {
+                        ERROR_Area.setText("Cierre de condicion IF incorrecto; en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1248,8 +1248,8 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("IT")) {
-                        ERROR_Area.setText("Inicio de IT incorrecto en la linea " + i + ": \n"
+                    if (token.contains("IF")) {
+                        ERROR_Area.setText("Inicio de IF incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1298,10 +1298,10 @@ public class Menu extends javax.swing.JFrame {
                 id = "([(a-z)(A-Z)](\\w)*)",
                 number = "((\\d)+)",
                 dec = "((\\d)+(\\.)(\\d)+)",
-                text = "((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)",
-                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                text = "((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)",
+                print = "((\\s)*PRINT(\\s)*(\\()(\\s)*((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 //take = "((\\s)*TAKE(\\b)(\\s)*"+id+"((\\s)*(,(\\s)*"+id+"))*(\\s)*(;))",
-                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((#)[.\\W\\w\\s]*(#))|(" + id + "))((\\s)*(\\+)((\\s)*((#)[.\\W\\w\\s]*(#))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
+                take = "((\\s)*TAKE(\\s)*(\\()(\\s)*((((\")[.\\W\\w\\s]*(\"))|(" + id + "))((\\s)*(\\+)((\\s)*((\")[.\\W\\w\\s]*(\"))|(" + id + ")))*)(\\s)*(\\))(\\s)*(;))",
                 operaciones = "((" + id + "|" + number + "|" + dec + ")(\\s)*([+-/*](\\s)*(" + id + "|" + number + "|" + dec + "))+)",
                 defVal = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*(;))",
                 defValVar = "((\\s)*" + id + "(\\s)*=(\\s)*(" + id + "|" + text + "|" + operaciones + "|" + number + "|" + dec + ")(\\s)*)",
@@ -1314,8 +1314,8 @@ public class Menu extends javax.swing.JFrame {
                 start3 = "((\\s)*STOP(\\s)*(\\}))",
                 when2 = "((\\s)*WHEN(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
                 when3 = "((\\s)*SWHEN(\\s)*(\\}))",
-                it2 = "((\\s)*IT(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
-                it3 = "((\\s)*COMPLETE(\\s)*(\\}))",
+                it2 = "((\\s)*IF(\\s)*(\\()(\\s)*" + condicion + "(\\s)*(\\))(\\s)*(\\{))",
+                it3 = "((\\s)*ENDIF(\\s)*(\\}))",
                 entero = "[0-9]*",
                 decimal = "[0-9]*.[0-9]+";
 
@@ -1617,9 +1617,9 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("COMPLETE")) {
+                    if (token.contains("ENDIF")) {
 
-                        ERROR_Area.setText("Cierre de condicion IT incorrecto en la linea " + i + ": \n"
+                        ERROR_Area.setText("Cierre de condicion IF incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1628,9 +1628,9 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("IT")) {
+                    if (token.contains("IF")) {
 
-                        ERROR_Area.setText("Inicio de IT incorrecto; en la linea " + i + ": \n"
+                        ERROR_Area.setText("Inicio de IF incorrecto; en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1771,8 +1771,8 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("COMPLETE")) {
-                        ERROR_Area.setText("Cierre de condicion IT incorrecto; en la linea " + i + ": \n"
+                    if (token.contains("ENDIF")) {
+                        ERROR_Area.setText("Cierre de condicion IF incorrecto; en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1781,8 +1781,8 @@ public class Menu extends javax.swing.JFrame {
                         errores = 1;
                         break;
                     }
-                    if (token.contains("IT")) {
-                        ERROR_Area.setText("Inicio de IT incorrecto en la linea " + i + ": \n"
+                    if (token.contains("IF")) {
+                        ERROR_Area.setText("Inicio de IF incorrecto en la linea " + i + ": \n"
                                 + "\n" + token);
                         for (int j = 1; j < i; j++) {
                             txt += "\n";
@@ -1857,14 +1857,14 @@ public class Menu extends javax.swing.JFrame {
         r.put("TAKE", 0);
         r.put("PRINT", 0);
         r.put("WHEN", 0);
-        r.put("IT", 0);
+        r.put("IF", 0);
         r.put("IS", 0);
         r.put("START", 0);
         r.put("STEP", 0);
         r.put("TO", 0);
         r.put("STOP", 0);
         r.put("SWHEN", 0);
-        r.put("COMPLETE", 0);
+        r.put("ENDIF", 0);
 
         operacion.put("/", 0);
         operacion.put("*", 0);
@@ -1877,7 +1877,7 @@ public class Menu extends javax.swing.JFrame {
         operacion.put("||", 0);
         operacion.put("&&", 0);
 
-        deli.put("#", 0);
+        deli.put("\"", 0);
         deli.put(";", 0);
         deli.put("{", 0);
         deli.put("}", 0);
@@ -1888,7 +1888,7 @@ public class Menu extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"Token", "Cantidad", "Tipo"});
 
-        StringTokenizer st = new StringTokenizer(txtATexto1.getText(), "{}();,\"=+-*/><||&&# \n\t", true);
+        StringTokenizer st = new StringTokenizer(txtATexto1.getText(), "{}();,\"=+-*/><||&&\" \n\t", true);
         String token, text = "";
         while (st.hasMoreTokens()) {
             token = st.nextToken();
@@ -1901,9 +1901,9 @@ public class Menu extends javax.swing.JFrame {
                     } else {
                         if (deli.containsKey(token)) {
                             deli.put(token, deli.get(token) + 1);
-                            if ("#".equals(token)) {
+                            if ("\"".equals(token)) {
                                 token = st.nextToken();
-                                while (st.hasMoreTokens() && !"#".equals(token)) {
+                                while (st.hasMoreTokens() && !"\"".equals(token)) {
                                     text += token;
                                     token = st.nextToken();
                                 }
